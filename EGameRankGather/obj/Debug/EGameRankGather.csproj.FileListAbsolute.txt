@@ -1,0 +1,16 @@
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\bin\Debug\EGameRankGather.exe.config
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\bin\Debug\EGameRankGather.exe
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\bin\Debug\EGameRankGather.pdb
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\bin\Debug\Dapper.dll
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\bin\Debug\FluentScheduler.dll
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\bin\Debug\MySql.Data.dll
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\bin\Debug\Newtonsoft.Json.dll
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\bin\Debug\QueryBuilder.dll
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\bin\Debug\SqlKata.Execution.dll
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\obj\Debug\EGameRankGather.csprojAssemblyReference.cache
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\obj\Debug\EGameRankGather.MainForm.resources
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\obj\Debug\EGameRankGather.Properties.Resources.resources
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\obj\Debug\EGameRankGather.csproj.GenerateResource.cache
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\obj\Debug\EGameRankGather.csproj.CopyComplete
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\obj\Debug\EGameRankGather.exe
+D:\GitHub我的项目\EGameRankGather\EGameRankGather\obj\Debug\EGameRankGather.pdb
