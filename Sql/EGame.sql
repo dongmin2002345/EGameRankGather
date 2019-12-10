@@ -2,9 +2,9 @@
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- 主机： 10.53.54.151:13224
--- 生成日期： 2019-12-08 13:35:36
--- 服务器版本： 5.7.18-20170830-log
+-- 主机： 9.3.211.35:14674
+-- 生成日期： 2019-12-10 20:46:54
+-- 服务器版本： 5.7.18-txsql-log
 -- PHP 版本： 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -34,9 +34,9 @@ CREATE TABLE `RankInfo` (
   `Id` int(11) NOT NULL,
   `UserId` bigint(20) NOT NULL COMMENT '用户Id',
   `UserNick` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '用户昵称',
-  `UserFans` int(11) NOT NULL DEFAULT '0' COMMENT '粉丝/关注人数',
-  `RoomOnline` int(11) DEFAULT '0' COMMENT '在线观看人数',
+  `UserFans` int(11) NOT NULL DEFAULT '0' COMMENT '粉丝/关注/订阅人数',
   `RoomTitle` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '房间标题',
+  `RoomOnline` int(11) DEFAULT '0' COMMENT '房间在线人数',
   `AppName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '直播分类',
   `LogTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
