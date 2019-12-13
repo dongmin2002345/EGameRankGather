@@ -34,7 +34,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(45, 25);
+            this.btnStart.Location = new System.Drawing.Point(50, 32);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(120, 60);
             this.btnStart.TabIndex = 0;
@@ -44,7 +44,7 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(219, 25);
+            this.btnStop.Location = new System.Drawing.Point(230, 32);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(120, 60);
             this.btnStop.TabIndex = 1;
@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 121);
+            this.ClientSize = new System.Drawing.Size(404, 121);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
             this.Name = "MainForm";

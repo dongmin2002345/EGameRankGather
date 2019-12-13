@@ -23,6 +23,8 @@ namespace EGameRankGather
         private void MainForm_Load(object sender, EventArgs e)
         {
             //RankTask();
+
+            //PercentTask("梦工厂", 100000);
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -35,6 +37,9 @@ namespace EGameRankGather
 
             //每隔5分钟,在线热门榜
             registry.Schedule(() => RankTask()).NonReentrant().ToRunEvery(5).Minutes();
+
+            //每天1:00点执行
+            registry.Schedule(() => PercentTask("梦工厂", 100000, 50000)).NonReentrant().ToRunEvery(1).Days().At(1, 0);
 
             JobManager.Initialize(registry);
         }
@@ -103,6 +108,112 @@ namespace EGameRankGather
                     AppName = item.appname
                 });
             }
+
+            connection.Close();
+        }
+
+        /// <summary>
+        /// 计算当前分类所占比例
+        /// </summary>
+        /// <param name="appName"></param>
+        /// <param name="online"></param>
+        private static void PercentTask(string appName, int online, int fans)
+        {
+            var connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+
+            var db = new QueryFactory(connection, new MySqlCompiler());
+
+            db.Logger = compiled =>
+            {
+                Console.WriteLine(compiled.ToString());
+            };
+
+            var rooms = db.Query("RankInfo")
+                .Select("UserId")
+                .SelectRaw("MAX(`RoomOnline`) as RoomOnline")
+                .Where("AppName", "=", appName)
+                .GroupBy("UserId")
+                .HavingRaw($"MAX(`RoomOnline`) >= {online} and MAX(`UserFans`) >= {fans}")
+                .OrderByRaw("MAX(`RoomOnline`) DESC")
+                .Get<Room>();
+
+            foreach (var room in rooms)
+            {
+                try
+                {
+                    //查询分类占百分比
+                    int percent = GetPercent(room.UserId, appName);
+
+                    //更新百分比
+                    UpdatePercent(room.UserId, appName, percent);
+                }
+                catch
+                {
+
+
+                }
+            }
+
+            connection.Close();
+        }
+
+        private static int GetPercent(int userId, string appName)
+        {
+            int count = 0;
+
+            int total = 0;
+
+            var connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+
+            var db = new QueryFactory(connection, new MySqlCompiler());
+
+            db.Logger = compiled =>
+            {
+                Console.WriteLine(compiled.ToString());
+            };
+
+            var roomCount = db.Query("RankInfo")
+                .Select("AppName")
+                .SelectRaw("count(*) as Count")
+                .Where("UserId", "=", userId)
+                .GroupBy("AppName")
+                .Get<RoomCount>();
+
+            foreach (var room in roomCount)
+            {
+                total += room.Count;
+
+                if (room.AppName == appName)
+                {
+                    count = room.Count;
+                }
+            }
+
+            connection.Close();
+
+            int percent = (int)(((double)count / total) * 100);
+
+            return percent;
+        }
+
+        private static void UpdatePercent(int userId, string appName, int percent)
+        {
+            var connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+
+            var db = new QueryFactory(connection, new MySqlCompiler());
+
+            db.Logger = compiled =>
+            {
+                Console.WriteLine(compiled.ToString());
+            };
+
+            int affected = db.Query("RankInfo")
+                .Where("UserId", "=", userId)
+                .Where("AppName", "=", appName)
+                .Where("AppPercent", "=", 0)
+                .Update(new { AppPercent = percent });
+
+            connection.Close();
         }
 
         private static string getWeb(string url)
